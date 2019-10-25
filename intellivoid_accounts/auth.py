@@ -54,7 +54,7 @@ class COA(object):
             "secret_key": self.secret_key
         })
 
-    def _get_coa_url(self):
+    def get_coa_url(self):
 
         protocol = "http"
         if self.COA_SECURED:
@@ -68,7 +68,7 @@ class COA(object):
             parameters.update({"redirect": redirect})
 
         try:
-            r = requests.post(self._get_coa_url(), parameters)
+            r = requests.post(self.get_coa_url(), parameters)
             response = json.loads(r.text)
         except Exception as e:
             raise AuthenticationError(e)
@@ -82,7 +82,7 @@ class COA(object):
         self.apply_application(parameters)
 
         try:
-            r = requests.post(self._get_coa_url(), parameters)
+            r = requests.post(self.get_coa_url(), parameters)
             response = json.loads(r.text)
         except Exception as e:
             raise AuthenticationError(e)
